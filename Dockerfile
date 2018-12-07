@@ -12,11 +12,9 @@ RUN npm config set registry https://registry.npm.taobao.org
 
 WORKDIR /code/ownphotos-frontend
 
+RUN npm install && npm install -g serve && npm cache clean --force
 ENV _DEAFULT_BACKEND_URL=http://192.168.99.100:8000
 RUN sed -i -e "s|changeme|$_DEAFULT_BACKEND_URL|g" /code/ownphotos-frontend/src/api_client/apiClient.js
-
-
-RUN npm install && npm install -g serve &&npm cache clean --force
 RUN npm run build
 
 CMD [ "serve","-s","build" ]
